@@ -1,0 +1,11 @@
+{
+  "source_drivers": {
+    "graficos_nsf_local.py": "5342045283ebbce84245990a75141ed6548f496fdbed3821c278d2b9f2dfa2e5",
+    "barrido_energia_maxima.py": "da635efb04877d66f254f4bec0e1ba47e0d869d103da0077f2d84ba028ec479b"
+  },
+  "notes": [
+    "Original self-contained drivers retained unchanged.",
+    "Variance analysis receives data/output paths through CLI.",
+    "Reference data remove unused embedded source files and unrelated archived summaries; retained numerical samples and results are unchanged."
+  ]
+}

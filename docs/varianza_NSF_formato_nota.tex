@@ -1,0 +1,276 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=22mm]{geometry}
+\usepackage{amsmath,amssymb,booktabs,array}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parskip}{4pt}
+\setlength{\parindent}{0pt}
+\setlength{\tabcolsep}{4pt}
+\newcommand{\SE}{\operatorname{SE}}
+\newcommand{\Var}{\operatorname{Var}}
+\title{Outgoing-energy variance in the retained NSF channels\\
+\large Numerical results in the notation of the technical note}
+\author{}
+\date{11 November 2026}
+\begin{document}
+\maketitle
+\vspace{-6mm}
+
+\section{Definitions and channel-resolved results}
+These results implement the definitions in \emph{Calculation of the
+Outgoing-Energy Variance}, dated 11 November 2026. We reprocess the original
+weighted integration samples; no new amplitude evaluations or changes to
+the physical acceptance are made. The amplitudes are the retained
+$2\to2$ exchange and $2\to3$ cubic iteration, with the same circular
+finite-part prescription and momentum cuts as in the mean-energy study.
+The omitted independent contacts and mixed sectors are not supplied by
+this second-moment calculation.
+
+We use $E_i=G=\epsilon=1$, $X=E_f/E_i$, and, for $n=2,3$,
+\[
+ P_n=J_n[|A_n|^2],\quad W_n=J_n[E_f|A_n|^2],\quad
+ Q_n=J_n[E_f^2|A_n|^2],\quad C_n=J_n[(X-1)^2|A_n|^2].
+\]
+All four use the identical measure, helicity sums, Bose factors and
+regulator. Write $P=\sum_nP_n$, and similarly for $W,Q,C$. Then
+\begin{equation}
+ \mu=\frac{W}{E_iP}=1+r_E,\qquad
+ v=\Var(X)=\frac{C}{P}-r_E^2
+ =\frac{Q}{E_i^2P}-\mu^2.
+ \label{eq:variance}
+\end{equation}
+The dimensional variance is $E_i^2v$; its physical standard deviation is
+$E_i\sqrt v$. No energy-conserving delta is inserted.
+
+\begin{table}[h!]
+\centering\small
+\caption{Channel weights and means at $E_{\max}=2024E_i$.
+Here $k=\kappa_{\rm IR}/E_i$, $p_n=P_n/P$, and $\mu_n=W_n/(E_iP_n)$.
+The weight errors are statistical; $p_2+p_3=1$.}
+\begin{tabular}{ccccc}
+\toprule
+$k$ & $p_2$ (\%) & $p_3$ (\%) & $\mu_2$ & $\mu_3$\\
+\midrule
+$10^{-5}$ & $5.87\pm0.88$ & $94.13\pm0.88$ & $0.999995299091$ & $1.000379460079$\\
+$10^{-6}$ & $0.595\pm0.034$ & $99.405\pm0.034$ & $0.999999530211$ & $1.000044069382$\\
+$10^{-7}$ & $0.0629\pm0.0043$ & $99.9371\pm0.0043$ & $0.999999953025$ & $1.000005246627$\\
+$10^{-8}$ & $0.00670\pm0.00043$ & $99.99330\pm0.00043$ & $0.999999995303$ & $1.000000611477$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering\small
+\caption{Physical channel variances $v_n=Q_n/(E_i^2P_n)-\mu_n^2$,
+total variance, and physical standard deviation, at $E_{\max}=2024E_i$.
+Uncertainties on $v$ and $\sqrt v$ are statistical errors of their
+estimators, not additional contributions to the physical spread.}
+\begin{tabular}{ccccc}
+\toprule
+$k$ & $v_2$ & $v_3$ & $v\ \pm\SE(\widehat v)$ &
+$\sqrt v\ \pm\SE(\widehat{\sqrt v})$\\
+\midrule
+$10^{-5}$ & $9.396\times10^{-6}$ & $3.230\times10^{-2}$ & $(3.040\pm0.784)\times10^{-2}$ & $(1.744\pm0.225)\times10^{-1}$\\
+$10^{-6}$ & $9.390\times10^{-7}$ & $3.882\times10^{-3}$ & $(3.859\pm0.351)\times10^{-3}$ & $(6.212\pm0.283)\times10^{-2}$\\
+$10^{-7}$ & $9.389\times10^{-8}$ & $4.060\times10^{-4}$ & $(4.057\pm0.324)\times10^{-4}$ & $(2.014\pm0.081)\times10^{-2}$\\
+$10^{-8}$ & $9.389\times10^{-9}$ & $4.021\times10^{-5}$ & $(4.020\pm0.337)\times10^{-5}$ & $(6.341\pm0.266)\times10^{-3}$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+All quoted variances are positive. At fixed finite $E_{\max}$, both $v$
+and $\sqrt v$ decrease over these four infrared cutoffs. At the smallest
+cutoff the dominant channel has $v_3\simeq4.02\times10^{-5}$: dominance
+of $2\to3$ does not by itself concentrate the final energy at $E_i$.
+
+\clearpage
+\section{Stored moments and independent identities}
+The old program called its first energy moment \texttt{Q}; this is
+$W_n$ in the present note. The note's $Q_n$ is the newly accumulated raw
+\emph{second} moment. The old centered second moment is $C_n$ here.
+Table~\ref{tab:moments} follows the note's notation throughout.
+
+\begin{table}[h!]
+\centering\scriptsize
+\caption{Channel-resolved moments at $E_i=1$ and $E_{\max}=2024$.
+Displayed values are rounded. The accompanying JSON retains full
+precision and covariance; subtracting the rounded $W_n-P_n$ is not a
+reliable way to recover the small first centered moment.}
+\label{tab:moments}
+\begin{tabular}{cccccc}
+\toprule
+$k$ & $n$ & $P_n$ & $W_n$ & $Q_n$ & $C_n$\\
+\midrule
+$10^{-5}$ & 2 & $4.7437611\times10^{-2}$ & $4.7437388\times10^{-2}$ & $4.7437611\times10^{-2}$ & $4.4574113\times10^{-7}$\\
+$10^{-5}$ & 3 & $7.6126211\times10^{-1}$ & $7.6155098\times10^{-1}$ & $7.8642540\times10^{-1}$ & $2.4585552\times10^{-2}$\\
+$10^{-6}$ & 2 & $4.7471440\times10^{-1}$ & $4.7471418\times10^{-1}$ & $4.7471440\times10^{-1}$ & $4.4575673\times10^{-7}$\\
+$10^{-6}$ & 3 & $7.9321883\times10^{1}$ & $7.9325379\times10^{1}$ & $7.9636794\times10^{1}$ & $3.0791947\times10^{-1}$\\
+$10^{-7}$ & 2 & $4.7476222\times10^{0}$ & $4.7476220\times10^{0}$ & $4.7476222\times10^{0}$ & $4.4575836\times10^{-7}$\\
+$10^{-7}$ & 3 & $7.5470657\times10^{3}$ & $7.5471053\times10^{3}$ & $7.5502088\times10^{3}$ & $3.0638815\times10^{0}$\\
+$10^{-8}$ & 2 & $4.7476864\times10^{1}$ & $4.7476864\times10^{1}$ & $4.7476864\times10^{1}$ & $4.4575866\times10^{-7}$\\
+$10^{-8}$ & 3 & $7.0877841\times10^{5}$ & $7.0877884\times10^{5}$ & $7.0880777\times10^{5}$ & $2.8497309\times10^{1}$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+In $2\to3$, each sample accumulates the same integration weight
+multiplied by $1$, $X-1$, $(X-1)^2$, or $X^2$. In the older $10^{-5}$
+run, the recorded inclusion-probability correction from the refined
+angular samples is applied to every moment. In $2\to2$ the quadrature
+folds the energies $x=u$ and $x=1/u$. Their distinct energies must be
+included in the second moment; the stored $u$ is not the physical
+energy of every contribution. Both branches retain their own support.
+
+The independent channel check is the law of total variance,
+\begin{equation}
+ v=\underbrace{p_2v_2+p_3v_3}_{v_{\rm within}}+
+ \underbrace{p_2p_3(\mu_2-\mu_3)^2}_{v_{\rm between}}.
+\end{equation}
+\begin{table}[h!]
+\centering\small
+\caption{Decomposition at $E_{\max}=2024E_i$. The variance is mainly
+the intrinsic spread within the channels, rather than separation of
+their means. The subtraction of $r_E^2$ in Eq.~\eqref{eq:variance} is
+included even though it is small.}
+\begin{tabular}{cccc}
+\toprule
+$k$ & $v_{\rm within}$ & $v_{\rm between}$ & $r_E^2$\\
+\midrule
+$10^{-5}$ & $3.0401751\times10^{-2}$ & $8.1490870\times10^{-9}$ & $1.2739584\times10^{-7}$\\
+$10^{-6}$ & $3.8588082\times10^{-3}$ & $1.1731160\times10^{-11}$ & $1.9188269\times10^{-9}$\\
+$10^{-7}$ & $4.0571471\times10^{-4}$ & $1.7605743\times10^{-14}$ & $2.7492189\times10^{-11}$\\
+$10^{-8}$ & $4.0203538\times10^{-5}$ & $2.5428506\times10^{-17}$ & $3.7385381\times10^{-13}$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Across the four cutoffs the largest absolute disagreement of the raw
+and centered variance formulas is $5.633\times10^{-16}$, while the largest
+residual of the total-variance identity is $4.337\times10^{-19}$.
+The condition $C/P\ge r_E^2$ holds at all four cutoffs. No negative
+variance estimate has been clipped to zero.
+
+\clearpage
+\section{Statistical error and numerical resolution}
+The note's statistical covariance is the covariance of the estimated
+moments, not the physical variance of $X$. For numerical stability we
+accumulate the vector $(P,D,C)$, where $D=W/E_i-P$.
+The covariance is estimated from independent scrambled Sobol replicas,
+dividing the sample covariance by the number of replicas and adding
+the covariances of independent energy strata. A linear transformation
+gives the covariance $\Sigma$ of $(P,B,C)$, $B=W/E_i$, as in the note.
+With $r=B/P-1$, we use
+\[
+ g=\left(-\frac{C}{P^2}+\frac{2rB}{P^2},
+          -\frac{2r}{P},\frac1P\right),\qquad
+ \SE(\widehat v)=\sqrt{g^T\Sigma g},\qquad
+ \SE(\widehat{\sqrt v})\simeq\frac{\SE(\widehat v)}{2\sqrt v}.
+\]
+The stable centered-coordinate gradient gives the same numerical error.
+A leave-one-replica-out check of $\SE(\widehat v)$ differs from the
+linear result by at most $3.14\%$ over the four cutoffs.
+These are estimated standard errors from four or eight replicas, not
+rigorous confidence bounds.
+
+\begin{table}[h!]
+\centering\small
+\caption{Sampling budgets and first-moment errors at $E_{\max}=2024E_i$.
+Each replica has 256 points below $16E_i$ and 128 above it. The older
+$10^{-5}$ result additionally uses 89 angular reevaluations, which are
+not 89 independent extra phase-space samples.}
+\begin{tabular}{ccccc}
+\toprule
+$k$ & Replicas & Total points & $r_E$ & $\SE(\widehat\mu)$\\
+\midrule
+$10^{-5}$ & 4 & 1536 & $3.56926\times10^{-4}$ & $6.2096\times10^{-5}$\\
+$10^{-6}$ & 8 & 3072 & $4.38044\times10^{-5}$ & $2.7698\times10^{-6}$\\
+$10^{-7}$ & 8 & 3072 & $5.24330\times10^{-6}$ & $2.7110\times10^{-7}$\\
+$10^{-8}$ & 8 & 3072 & $6.11436\times10^{-7}$ & $4.6625\times10^{-8}$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Thus the sample size is constant over $10^{-6},10^{-7},10^{-8}$, but
+not over the complete set. The mean error is obtained from importance
+sampling and correlated moment ratios; it is not $\sqrt{v/N}$ for
+unweighted draws from the physical outgoing distribution.
+
+The deterministic $2\to2$ integration is held fixed in the statistical
+covariance. Its numerical error is checked separately by changing the
+radial Gauss order from 4 to 6 at transfer order 6:
+\begin{center}
+\begin{tabular}{cc}
+\toprule $k$ & $|v_{n_x=6}-v_{n_x=4}|$\\\midrule
+$10^{-5}$ & $8.639\times10^{-9}$\\
+$10^{-6}$ & $1.113\times10^{-10}$\\
+$10^{-7}$ & $1.236\times10^{-12}$\\
+$10^{-8}$ & $1.305\times10^{-14}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+These observed shifts are much smaller than the statistical errors on
+$v$. The archived angular checks are selected pointwise tests; they
+do not provide a full-integral variance at doubled angular order or
+a global bound on angular prescription uncertainty.
+
+\clearpage
+\section{Sensitivity to the upper bound and angular partition}
+\begin{table}[h!]
+\centering\small
+\caption{Upper-energy sensitivity at fixed $k=10^{-8}$. The original
+samples up to $2024E_i$ are supplemented with eight independent
+128-point replicas in $2024E_i<E_f\le18096E_i$. The same tail points
+are filtered at each upper bound, preserving paired covariance.}
+\begin{tabular}{cccc}
+\toprule
+$E_{\max}/E_i$ & $v\pm\SE(\widehat v)$ &
+$\sqrt v\pm\SE(\widehat{\sqrt v})$ & $r_E$\\
+\midrule
+2024 & $(4.020\pm0.337)\times10^{-5}$ & $(6.341\pm0.266)\times10^{-3}$ & $6.1144\times10^{-7}$\\
+4048 & $(7.438\pm0.603)\times10^{-5}$ & $(8.624\pm0.349)\times10^{-3}$ & $6.2285\times10^{-7}$\\
+16192 & $(3.768\pm0.323)\times10^{-4}$ & $(1.941\pm0.083)\times10^{-2}$ & $6.5924\times10^{-7}$\\
+18096 & $(4.106\pm0.352)\times10^{-4}$ & $(2.026\pm0.087)\times10^{-2}$ & $6.6122\times10^{-7}$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Increasing $E_{\max}/E_i$ from 2024 to 18096 multiplies the variance by
+$10.21$. Its paired change is
+$\Delta v=(3.704\pm0.333)\times10^{-4}$; the error of this difference uses the
+cross-bound covariance. The original $M=2024$ row uses 3072 samples;
+the larger-bound rows include the 1024 tail samples as well.
+The first centered moment changes much less than the second one.
+Consequently, upper-bound stability of the mean does not establish
+upper-bound stability of the variance. No ultraviolet limit is inferred.
+
+A separate full paired test at $k=10^{-7}$ and $E_{\max}=2048E_i$
+changed the angular partition radius fraction from 0.35 to 0.175,
+while retaining the full sphere. It gave
+\begin{align*}
+ v_{0.35}&=4.104856069\times10^{-4}, &
+ v_{0.175}&=4.104857198\times10^{-4},\\
+ \Delta v&=1.130\times10^{-10}, &
+ \SE(\Delta\widehat v)&=1.317\times10^{-11}.
+\end{align*}
+The statistical error on $v_{0.35}$ is $3.283\times10^{-5}$, far larger
+than this partition shift. This is a change of integration partition
+within the circular prescription, not a test of removing an excluded
+angular cone or of changing the singular-kernel prescription itself.
+
+\section{Interpretation and scope}
+At fixed $E_{\max}=2024E_i$ the mean residual and physical variance
+both decrease across the four tabulated infrared cutoffs. The variance
+remains positive at each finite cutoff and is dominated by $v_3$ at
+the lowest cutoffs. The upper-energy scan shows that the second moment
+still depends appreciably on the chosen finite energy domain.
+These observations do not establish convergence for a joint infrared
+and ultraviolet limit, nor a commutator identity $[H,S]=0$.
+
+All results refer to the same restricted ensemble of connected,
+retained amplitudes. The errors quantify sampling variability, with
+$2\to2$ held fixed; omitted amplitudes, the finite IR/energy domain,
+and the angular extension are not absorbed into those bars. The
+accompanying data include $P_n,W_n,Q_n,C_n$, channel means and
+variances, covariance matrices and the identity residuals at full
+precision, together with the reduction script and the original inputs.
+
+\end{document}
